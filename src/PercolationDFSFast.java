@@ -13,6 +13,12 @@ public class PercolationDFSFast extends PercolationDFS  {
 	
 	@Override    //This overrides this method from the parent class to make it faster
 	protected void updateOnOpen(int row, int col) {
+		if (! inBounds(row,col)) {
+			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
+		}
+
+		
+		
 		if (row == 0) {   //checks if the cell is in the top row and then fills it accordingly
 			dfs(row,col);
 		}
