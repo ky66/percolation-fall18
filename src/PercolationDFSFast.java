@@ -24,20 +24,21 @@ public class PercolationDFSFast extends PercolationDFS  {
 		}
 		
 		//The next if statements check if the cell is adjacent to a full cell and then it opens it up. 
-		if (myGrid[row-1][col] == FULL) {
+		if (myGrid[row-1][col] == FULL && inBounds(row-1,col)) {
+			
 			dfs(row,col);
 		}
 		
-		if (myGrid[row+1][col] == FULL) {
+		if (myGrid[row+1][col] == FULL && inBounds(row+1,col)) {
 			dfs(row,col);
 		}
 		
 		
-		if (myGrid[row][col-1] == FULL) {
+		if (myGrid[row][col-1] == FULL && inBounds(row,col-1)) {
 			dfs(row,col);
 		}
 	
-		if (myGrid[row][col+1] == FULL) {
+		if (myGrid[row][col+1] == FULL && inBounds(row,col+1)) {
 			dfs(row,col);
 		}
 		
