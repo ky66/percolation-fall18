@@ -17,10 +17,15 @@ public class PercolationBFS extends PercolationDFSFast{
 	@Override
 	protected void dfs(int row, int col) {
 		
+		if (! inBounds(row,col)) {
+			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
+		}
+
+		
 		int size = myGrid.length;   // n of the grid
 		myGrid[row][col] = FULL; //This method will first make the cell at (row,col) as FULL
 
-		Queue<Integer> qp = new LinkedList<>();  
+		Queue<Integer> qp = new LinkedList<>();  //creates a new Queue object
 		
 		
 		qp.add(row*size + col);  //This adds the cell to the QUEUE object
@@ -34,23 +39,23 @@ public class PercolationBFS extends PercolationDFSFast{
             col = p%size;
             
 
-				if (myGrid[row-1][col] != FULL) {
+				if (!isFull(row-1, col) || isOpen(row-1, col)) {
 					myGrid[row-1][col] = FULL; 
 					qp.add(myGrid[row-1][col]);
 				}
 				
-				if (myGrid[row+1][col] != FULL) {
+				if (!isFull(row+1, col) || isOpen(row+1, col)) {
 					myGrid[row+1][col] = FULL; 
 					qp.add(myGrid[row+1][col]);
 				}
 				
 				
-				if (myGrid[row][col-1] != FULL) {
+				if (!isFull(row, col-1) || isOpen(row, col-1)) {
 					myGrid[row][col-1] = FULL; 
 					qp.add(myGrid[row][col-1]);
 				}
 			
-				if (myGrid[row][col+1] != FULL) {
+				if (!isFull(row, col+1) || isOpen(row, col+1)) {
 					myGrid[row][col+1] = FULL; 
 					qp.add(myGrid[row][col+1]);;
 				}
