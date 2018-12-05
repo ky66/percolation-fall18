@@ -13,7 +13,7 @@ public class PercolationDFSFast extends PercolationDFS  {
 	
 	@Override    //This overrides this method from the parent class to make it faster
 	protected void updateOnOpen(int row, int col) {
-		if (! inBounds(row,col)) {
+		if (! inBounds(row,col)) { //checks if it is inbounds
 			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
 		}
 
@@ -25,7 +25,8 @@ public class PercolationDFSFast extends PercolationDFS  {
 		
 		//The next if statements check if the cell is adjacent to a full cell and then it opens it up. 
 		else if (inBounds(row-1,col) && myGrid[row-1][col] == FULL) {
-			dfs(row,col);
+			dfs(row,col); //the next if statemtents are basically going up, down, left and right and 
+			//calling dfs recursively
 		}
 		
 		else if (inBounds(row+1,col) && myGrid[row+1][col] == FULL) {

@@ -8,17 +8,76 @@ public class PercolationUF implements IPercolate  {
 	
 	private final int VTOP;
 	private final int VBOTTOM;
+	private boolean[][] myGrid;
+	private IUnionFind myFinder;
+	private int order;
 	
-	PercolationUF(int size, IUnionFind finder){
-		int [][] myGrid = new int[size][size];
-		VTOP = finder.initialize(size*size + 2);
+	PercolationUF(IUnionFind finder,int size){
+		order = size;
+		myGrid = new boolean[size][size]; //creates a new mygrid of size n x n
+		VTOP = size*size;
+		VBOTTOM = size*size + 1; 
+		myFinder = finder;
+		myFinder.initialize(size*size + 2);  
+
 	}
+	
+	public int getindex(int row, int col) {
+		return  row*order + col;
+	}
+
 
 	@Override
 	public void open(int row, int col) {
 		if (! inBounds(row,col)) {
 			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
 		}
+		
+		if (row == 0) {
+			myFinder.union(getindex(row,col), VTOP);
+		}
+		
+		if (row == order-1) {
+			myFinder.union(getindex(row,col), VBOTTOM);
+		}
+		
+		else if (myGrid[row][col] == false){
+			if (inBounds(row-1,col) && myGrid[row-1][col]== false) {
+				myFinder.union(getindex(row,col), getindex(row-1,col));
+			}
+			
+		else if (inBounds(row+1,col) && myGrid[row+1][col]== false) {
+			myFinder.union(getindex(row,col), getindex(row+1,col));
+			}
+		
+		else if (inBounds(row,col-1) && myGrid[row][col-1]== false) {
+			myFinder.union(getindex(row,col), getindex(row,col-1));
+			
+		}
+		
+		else if (inBounds(row,col+1) && myGrid[row+1][col+1]== false) {
+			
+			myFinder.union(getindex(row,col), getindex(row,col+1));
+			
+		}
+			
+			
+		}
+//			
+//			else if (inBounds(row+1,col) && myGrid[row+1][col] == FULL) {
+//			
+//			}
+//			
+//			
+//			else if (inBounds(row,col-1) && myGrid[row][col-1] == FULL) {
+//			
+//			}
+//		
+//			else if (inBounds(row,col+1) && myGrid[row][col+1] == FULL) {
+//				
+			
+			
+		
 		
 		
 	}
@@ -30,7 +89,9 @@ public class PercolationUF implements IPercolate  {
 		if (! inBounds(row,col)) {
 			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
 		}
-		return false;
+		
+		
+		return myGrid[row][col];
 	}
 
 	@Override
@@ -39,12 +100,18 @@ public class PercolationUF implements IPercolate  {
 		if (! inBounds(row,col)) {
 			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
 		}
+		if (myFinder.connected(VBOTTOM, getindex(row,col))){
+			return true;
+		}
+		
 		return false;
 	}
 
 	@Override
 	public boolean percolates() {
-		// TODO Auto-generated method stub
+		if (myFinder.connected(VBOTTOM, VTOP)){
+			return true;
+		}
 		return false;
 	}
 
