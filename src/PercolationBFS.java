@@ -25,8 +25,16 @@ public class PercolationBFS extends PercolationDFSFast{
 		
 		qp.add(myGrid[row][col]);  //This adds the cell to the QUEUE object
 		
+        int[] rowDelta = {-1,1,0,0};
+        int[] colDelta = {0,0,-1,1};
+        
         while (qp.size() != 0){
             Integer p = qp.remove();
+            
+            for(int k=0; k < rowDelta.length; k++){
+                row = p + rowDelta[k];
+                col = p + colDelta[k];
+            }
 
 				if (myGrid[row-1][col] != FULL) {
 					myGrid[row-1][col] = FULL; 

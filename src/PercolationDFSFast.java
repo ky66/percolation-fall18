@@ -14,7 +14,7 @@ public class PercolationDFSFast extends PercolationDFS  {
 	@Override    //This overrides this method from the parent class to make it faster
 	protected void updateOnOpen(int row, int col) {
 		if (row == 0) {   //checks if the cell is in the top row and then fills it accordingly
-			dfs(0,col);
+			dfs(row,col);
 		}
 		
 		//The next if statements check if the cell is adjacent to a full cell and then it opens it up. 
@@ -36,10 +36,6 @@ public class PercolationDFSFast extends PercolationDFS  {
 		}
 		
 
-		for (int k = 0; k < myGrid[0].length; k++)
-			
-			
-			dfs(0, k);
-	}
 
+}
 }
