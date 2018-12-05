@@ -20,21 +20,19 @@ public class PercolationBFS extends PercolationDFSFast{
 		int size = myGrid.length;   // n of the grid
 		myGrid[row][col] = FULL; //This method will first make the cell at (row,col) as FULL
 
-		
 		Queue<Integer> qp = new LinkedList<>();  
 		
-		qp.add(myGrid[row][col]);  //This adds the cell to the QUEUE object
 		
-        int[] rowDelta = {-1,1,0,0};
-        int[] colDelta = {0,0,-1,1};
-        
+		qp.add(row*size + col);  //This adds the cell to the QUEUE object
+		
+//        int[] rowDelta = {-1,1,0,0};
+//        int[] colDelta = {0,0,-1,1};
+//        
         while (qp.size() != 0){
             Integer p = qp.remove();
+            row = p/size;
+            col = p%size;
             
-            for(int k=0; k < rowDelta.length; k++){
-                row = p + rowDelta[k];
-                col = p + colDelta[k];
-            }
 
 				if (myGrid[row-1][col] != FULL) {
 					myGrid[row-1][col] = FULL; 
@@ -60,24 +58,5 @@ public class PercolationBFS extends PercolationDFSFast{
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		// out of bounds?
-		if (! inBounds(row,col)) return;
-		
-		// full or NOT open, don't process
-		if (isFull(row, col) || !isOpen(row, col))
-			return;
-		
-		myGrid[row][col] = FULL;
-		dfs(row - 1, col);
-		dfs(row, col - 1);
-		dfs(row, col + 1);
-		dfs(row + 1, col);
 	}
 }
