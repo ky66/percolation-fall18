@@ -30,38 +30,27 @@ public class PercolationBFS extends PercolationDFSFast{
 		
 		qp.add(row*size + col);  //This adds the cell to the QUEUE object
 		
-//        int[] rowDelta = {-1,1,0,0};
-//        int[] colDelta = {0,0,-1,1};
-//        
+        int[] rowDelta = {-1,1,0,0};
+        int[] colDelta = {0,0,-1,1};
+        
         while (qp.size() != 0){
             Integer p = qp.remove();
             row = p/size;
             col = p%size;
             
-
-				if (inBounds(row-1,col) && !isFull(row-1, col) && isOpen(row-1, col)) {
-					myGrid[row-1][col] = FULL; 
-					qp.add(myGrid[row-1][col]);
-				}
-				
-				if (inBounds(row+1,col) && !isFull(row+1, col) && isOpen(row+1, col)) {
-					myGrid[row+1][col] = FULL; 
-					qp.add(myGrid[row+1][col]);
-				}
-				
-				
-				if (inBounds(row,col-1) && !isFull(row, col-1) && isOpen(row, col-1)) {
-					myGrid[row][col-1] = FULL; 
-					qp.add(myGrid[row][col-1]);
-				}
-			
-				if (inBounds(row,col+1) && !isFull(row, col+1) && isOpen(row, col+1)) {
-					myGrid[row][col+1] = FULL; 
-					qp.add(myGrid[row][col+1]);;
-				}
+            for(int k=0; k < rowDelta.length; k++){
+            	int row1 = row + rowDelta[k];
+            	int col1 = col + colDelta[k];
+            	
+            	if (inBounds(row1,col1) && !isFull(row1, col1) && isOpen(row1, col1)){
+            		qp.add(myGrid[row1][col1]);
+            		myGrid[row1][col1] = FULL; 
+            		
+            	}
+            	
             }
-		
-		
-		
+        }
 	}
 }
+
+
