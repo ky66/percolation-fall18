@@ -20,6 +20,7 @@ public class PercolationUF implements IPercolate  {
 		VBOTTOM = size*size + 1;    //just initialized to a unique object
 		myFinder = finder;
 		myFinder.initialize(size*size + 2);  
+		myOpenCount = 0;
 
 	}
 	
@@ -34,19 +35,17 @@ public class PercolationUF implements IPercolate  {
 			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
 		} //checks if it is out of bounds or not
 		
+		myOpenCount += 1;
 		if (row == 0) {
-			myOpenCount+= 1;
 			myFinder.union(getindex(row,col), VTOP);
 		} //if it is in the top row, union  it with VTOP
 		
 		if (row == order-1) {
-			myOpenCount+= 1;
 			myFinder.union(getindex(row,col), VBOTTOM);
 		}  //if it is in the top row, union  it with VBOTTOM
 		
 		if (myGrid[row][col] == false){
 			myGrid[row][col] = true; //opens the cell
-			myOpenCount+= 1;
 			if (inBounds(row-1,col) && myGrid[row-1][col]== true) {
 				myFinder.union(getindex(row,col), getindex(row-1,col)); //checks the neighbors
 			}
