@@ -47,7 +47,6 @@ public class PercolationUF implements IPercolate  {
 		
 		if (myGrid[row][col] == false){
 			myGrid[row][col] = true; //opens the cell
-			myOpenCount += 1;
 			if (inBounds(row-1,col) && myGrid[row-1][col]== true) {
 				myFinder.union(getindex(row,col), getindex(row-1,col)); //checks the neighbors
 			}
@@ -107,13 +106,13 @@ public class PercolationUF implements IPercolate  {
 	public boolean percolates() {
 		if (myFinder.connected(VBOTTOM, VTOP)){
 			return true;
-		} //if the VTOP and bottom connected it goes throgh
+		} //if the VTOP and bottom connected it goes through
 		return false;
 	}
 
 	@Override
 	public int numberOfOpenSites() {
-		return myOpenCount;
+		return myOpenCount; //returns the number of open sites
 
 	}
 	
