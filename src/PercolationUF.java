@@ -12,7 +12,7 @@ public class PercolationUF implements IPercolate  {
 	private IUnionFind myFinder;
 	private int order;
 	
-	PercolationUF(IUnionFind finder,int size){
+	PercolationUF(int size, IUnionFind finder){
 		order = size;
 		myGrid = new boolean[size][size]; //creates a new mygrid of size n x n
 		VTOP = size*size;
@@ -63,23 +63,7 @@ public class PercolationUF implements IPercolate  {
 			
 			
 		}
-//			
-//			else if (inBounds(row+1,col) && myGrid[row+1][col] == FULL) {
-//			
-//			}
-//			
-//			
-//			else if (inBounds(row,col-1) && myGrid[row][col-1] == FULL) {
-//			
-//			}
-//		
-//			else if (inBounds(row,col+1) && myGrid[row][col+1] == FULL) {
-//				
-			
-			
-		
-		
-		
+
 	}
 
 	@Override
@@ -90,8 +74,14 @@ public class PercolationUF implements IPercolate  {
 			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
 		}
 		
+		else if (myGrid[row][col] == true) {
+			return true;
+		}
 		
-		return myGrid[row][col];
+		else {
+			return false;
+		}
+		
 	}
 
 	@Override
