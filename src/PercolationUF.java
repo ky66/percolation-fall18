@@ -34,7 +34,6 @@ public class PercolationUF implements IPercolate  {
 			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
 		} //checks if it is out of bounds or not
 		
-		myOpenCount++;
 		if (row == 0) {
 			myFinder.union(getindex(row,col), VTOP);
 		} //if it is in the top row, union  it with VTOP
@@ -45,6 +44,7 @@ public class PercolationUF implements IPercolate  {
 		
 		if (myGrid[row][col] == false){
 			myGrid[row][col] = true; //opens the cell
+			myOpenCount+= 1;
 			if (inBounds(row-1,col) && myGrid[row-1][col]== true) {
 				myFinder.union(getindex(row,col), getindex(row-1,col)); //checks the neighbors
 			}
