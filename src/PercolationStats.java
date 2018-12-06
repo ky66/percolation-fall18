@@ -14,8 +14,8 @@ public class PercolationStats {
 	public static Random ourRandom = new Random(RANDOM_SEED);
 	
 	 private IPercolate getPercolator(int size) {
-		 //return new PercolationBFS(size);
-         return new PercolationDFS(size); 
+		 return new PercolationBFS(size);
+//         return new PercolationDFS(size); 
 		 //IUnionFind uf = new QuickUWPC();
          //return new PercolationUF(uf,size);
 	 }
