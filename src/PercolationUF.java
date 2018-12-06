@@ -113,8 +113,8 @@ public class PercolationUF implements IPercolate  {
 
 	@Override
 	public int numberOfOpenSites() {
-		// TODO Auto-generated method stub
-		return 0;
+		return myOpenCount;
+
 	}
 	
 	protected boolean inBounds(int row, int col) { //helper method to check if row and col are inbounds
