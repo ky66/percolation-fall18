@@ -1,23 +1,96 @@
-Your name
-Your netid
+Kamyar Yazdani
+ky66
 
 Copy/Paste results from PercolationStats using PercolationDFS
 
-
+simulation data for 20 trials
+grid	mean	stddev	time
+100	0.593	0.014	1.143
+200	0.591	0.010	13.150
+400	0.590	0.006	190.954
+... (it was taking a long time but the mean and stdev values are correct)
 
 Copy/Paste results from PercolationStats using PercolationDFSFast
 
+simulation data for 20 trials
+grid	mean	stddev	time
+100	0.593	0.014	0.275
+200	0.591	0.010	0.230
+400	0.590	0.006	1.133
+800	0.594	0.004	7.354
+
+(I could not complete because I got stackoverflow error)
+
+simulation data for 40 trials
+grid	mean	stddev	time
+100	0.594	0.015	0.379
+200	0.591	0.009	0.473
+400	0.591	0.005	2.714
+800	0.593	0.004	23.449
+
 
 Copy/Paste results from PercolationStats using PercolationBFS
+
+simulation data for 20 trials
+grid	mean	stddev	time
+100	0.593	0.014	0.370
+200	0.591	0.010	0.450
+400	0.590	0.006	2.068
+800	0.594	0.004	10.756
+1600	0.592	0.002	44.580
+3200	0.593	0.001	266.946
+
+simulation data for 40 trials
+grid	mean	stddev	time
+100	0.594	0.015	0.537
+200	0.591	0.009	0.866
+400	0.591	0.005	4.332
+800	0.593	0.004	23.916
+1600	0.593	0.002	126.702
+
+
 
 
 Copy/Paste results from PercolationStats using PercolationUF 
 with the QuickUWPC UnionFind implementation.
 
+simulation data for 20 trials
+grid	mean	stddev	time
+100	0.593	0.014	0.169
+200	0.591	0.010	0.250
+400	0.590	0.006	0.887
+800	0.594	0.004	5.361
+1600	0.592	0.002	28.999
+3200	0.593	0.001	215.120
+
+
+simulation data for 40 trials
+grid	mean	stddev	time
+100	0.594	0.015	0.220
+200	0.591	0.009	0.287
+400	0.591	0.005	1.780
+800	0.593	0.004	9.303
+1600	0.593	0.002	47.915
+
 1. How does doubling the grid size affect running time (keeping # trials fixed)
+
+In the DFSm the run time becomes almost x15, in DFS fast, it becomes x7, in BFS it becomes x5, and in
+UF it looks like it is approximately x5 or x6.
 
 
 2. How does doubling the number of trials affect running time.
 
+In percolation BFS, as we can see the time has doubled. In BFS, also it approximately doubles. Same for 
+DFSFast as well using my computer.
+
 
 3. Estimate the largest grid size you can run in 24 hours with 20 trials. Explain your reasoning.
+
+so, we are going to have to use PercolationUF to do that because it is the fastest method we have. Using mathematical extrapolation, 
+we can see that with 20 trials, percolation UF runs a grid of size 3200 in 215 seconds and it is 
+
+
+
+
+
+
