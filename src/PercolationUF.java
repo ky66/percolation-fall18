@@ -35,10 +35,12 @@ public class PercolationUF implements IPercolate  {
 		} //checks if it is out of bounds or not
 		
 		if (row == 0) {
+			myOpenCount+= 1;
 			myFinder.union(getindex(row,col), VTOP);
 		} //if it is in the top row, union  it with VTOP
 		
 		if (row == order-1) {
+			myOpenCount+= 1;
 			myFinder.union(getindex(row,col), VBOTTOM);
 		}  //if it is in the top row, union  it with VBOTTOM
 		
