@@ -11,6 +11,7 @@ public class PercolationUF implements IPercolate  {
 	private boolean[][] myGrid; //the boolean grid we want
 	private IUnionFind myFinder;  //our myFinder object
 	private int order; //gets initialized to size later on
+	private int myOpenCount;
 	
 	PercolationUF(int size, IUnionFind finder){
 		order = size;
@@ -33,6 +34,7 @@ public class PercolationUF implements IPercolate  {
 			throw new IndexOutOfBoundsException(String.format("(%d,%d) not in bounds", row,col));
 		} //checks if it is out of bounds or not
 		
+		myOpenCount++;
 		if (row == 0) {
 			myFinder.union(getindex(row,col), VTOP);
 		} //if it is in the top row, union  it with VTOP
